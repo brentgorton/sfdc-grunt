@@ -54,5 +54,5 @@ grunt.registerTask('sfdc-undeploy-init', function(){
 	grunt.task.run(util.retrieveSFDC(util.const.undeploy.metadata));
 });
 
-grunt.loadNpmTasks('grunt-ant-sfdc');
+grunt.loadNpmTasks('grunt-ant-sfdc-purge');
 }
