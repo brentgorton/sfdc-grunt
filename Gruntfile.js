@@ -1,4 +1,5 @@
 module.exports = function(grunt){
 	var path = require('path');
-	grunt.task.loadTasks('./tasks');
+	require('./tasks/default.js')();
+	//grunt.task.loadTasks('./tasks');
 }
