@@ -1,4 +1,4 @@
 module.exports = function(grunt){
 	var path = require('path');
-	grunt.task.loadTasks('grunt/tasks');
+	grunt.task.loadTasks('tasks');
 }
