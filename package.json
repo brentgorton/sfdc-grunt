@@ -1,6 +1,6 @@
 {
-  "name": "build-process",
-  "version": "0.0.3",
+  "name": "sfdc-grunt",
+  "version": "1.0.0",
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-ant-sfdc" : "~0.2.6",
