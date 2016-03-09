@@ -9,7 +9,7 @@
     "xml2json" : "~0.9.0",
     "pretty-data" : "0.40.0",
     "grunt-contrib-clean" : "0.7.0",
-    "grunt-ant-sfdc" : "1.2.0",
+    "grunt-ant-sfdc" : "https://github.com/brentgorton/grunt-ant-sfdc/archive/1.0-purge.0.tar.gz",
     "grunt-force-task" : "2.0.0",
     "load-grunt-config" : "0.19.1",
     "node-status" : "0.1.6"
