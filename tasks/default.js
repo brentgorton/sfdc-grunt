@@ -6,6 +6,7 @@ var undeployTasks = require('./undeploy/tasks.js');
 var callbacks = require('../task.callbacks.js');
 require('./undeploy/init.js')();
 
+module.exports = function(){
 grunt.task.loadTasks('./tasks/undeploy');
 var cleanConfig = grunt.config.get('clean') || {};
 cleanConfig.undeploy = [util.const.undeploy.root];
@@ -62,3 +63,4 @@ grunt.registerTask('delete-code-final', function(){
 	)
 });
 grunt.loadNpmTasks('grunt-contrib-clean');
+}
