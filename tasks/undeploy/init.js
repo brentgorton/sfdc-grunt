@@ -1,10 +1,10 @@
 var grunt = require('grunt');
 var util = require('../../util.js');
 var status = require('node-status');
-grunt.task.loadTasks('grunt/tasks/undeploy/objects');
-grunt.task.loadTasks('grunt/tasks/undeploy/code');
-grunt.task.loadTasks('grunt/tasks/undeploy/security');
-grunt.task.loadTasks('grunt/tasks/undeploy/app');
+grunt.task.loadTasks('tasks/undeploy/objects');
+grunt.task.loadTasks('tasks/undeploy/code');
+grunt.task.loadTasks('tasks/undeploy/security');
+grunt.task.loadTasks('tasks/undeploy/app');
 
 grunt.util.hooker.hook(grunt.log, 'write', {
 	pre : function(value){
