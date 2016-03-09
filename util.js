@@ -83,7 +83,7 @@ var Util = {
 		grunt.config.set('antretrieve', config);
 		return 'antretrieve:' + taskName;
 	},
-	deploySFDC : function(path, existingPackage){
+	deploySFDC : function(path, runTests, existingPackage){
 		var config = grunt.config.get('antdeploy') || {};
 		config.options = {
 				serverurl : 'https://login.salesforce.com',
@@ -95,7 +95,8 @@ var Util = {
 		config.dynamic = {
 			options : {
 				root : path,
-				existingPackage : (existingPackage == undefined || existingPackage)
+				existingPackage : (existingPackage == undefined || existingPackage),
+				runAllTests : (runTests == undefined || runTests)
 			}
 		}
 		grunt.config.set('antdeploy', config);
