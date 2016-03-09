@@ -15,6 +15,7 @@ require('./objects/standardObjects.delete.js')();
 require('./objects/workflows.delete.js')();
 require('./security/permissionsets.wipe.js')();
 
+/*
 grunt.util.hooker.hook(grunt.log, 'write', {
 	pre : function(value){
 		try{
@@ -46,10 +47,12 @@ grunt.util.hooker.hook(grunt.log, 'writeln', {
 			success : function(){}
 		});
 	}
-});  
-
+}); 
+*/ 
+module.exports = function(){
 grunt.registerTask('sfdc-undeploy-init', function(){
 	grunt.task.run(util.retrieveSFDC(util.const.undeploy.metadata));
 });
 
 grunt.loadNpmTasks('grunt-ant-sfdc');
+}
