@@ -2,21 +2,21 @@ var grunt = require('grunt');
 var util = require('../../../util.js');
 var parser = require('xml2json');
 var pd = require('pretty-data').pd;
-var standardObjectFields = {
-	FieldSet : {
-		User : ['Record_Details']
-	},
-	ValidationRule : {
-		Case : ['One_Project_Phase_or_Task']
-	},
-	CustomField : {
-		Case : ['Project_Phase__c', 'Project__c', 'Project_Task__c', 'Worked_Hours__c'],
-		User : ['User.Sorting_Hash__c', 'User.Allocatable__c']
-	}
-
-};
 
 module.exports = function(){
+	var standardObjectFields = {
+		FieldSet : {
+			User : ['Record_Details']
+		},
+		ValidationRule : {
+			Case : ['One_Project_Phase_or_Task']
+		},
+		CustomField : {
+			Case : ['Project_Phase__c', 'Project__c', 'Project_Task__c', 'Worked_Hours__c'],
+			User : ['User.Sorting_Hash__c', 'User.Allocatable__c']
+		}
+
+	};
 	grunt.registerTask('sfdc-standardobjects-prep', function(){
 		var packageXml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
 		'<Package xmlns="http://soap.sforce.com/2006/04/metadata">\n';
