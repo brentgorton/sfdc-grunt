@@ -2,7 +2,7 @@
   "name": "sfdc-grunt",
   "version": "1.0.0",
   "dependencies" : {
-    "grunt-ant-sfdc-purge" : "https://github.com/brentgorton/grunt-ant-sfdc/archive/1.0-purge.0.tar.gz"
+    "grunt-ant-sfdc-purge" : "https://github.com/brentgorton/grunt-ant-sfdc/archive/master.tar.gz"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
