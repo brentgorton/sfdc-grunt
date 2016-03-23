@@ -18,14 +18,15 @@ var globalStatus;
 status.start({ invert : false, interval : 500 });
 grunt.registerTask('sfdc-undeploy', undeployTasks);
 grunt.registerTask('sfdc-rebuild', ['sfdc-undeploy', 'sfdc-deploy', 'clean:undeploy']);
-grunt.registerTask('sfdc-rebuild-test', ['sfdc-undeploy', 'sfdc-deploy-test', 'clean:undeploy']);
+grunt.registerTask('sfdc-rebuild-test', ['sfdc-undeploy', 'sfdc-deploy', 'sfdc-deploy-test', 'clean:undeploy']);
 
 grunt.registerTask('sfdc-deploy', function(){
 	grunt.task.run(util.deploySFDC('src/'));
 });
 
 grunt.registerTask('sfdc-deploy-test', function(){
-	grunt.task.run(util.deploySFDC('src/', true));
+	grunt.file.mkdir(util.const.undeploy + 'tests/');
+	grunt.task.run(util.deploySFDC(util.const.undeploy + 'tests/', true));
 });
 
 
