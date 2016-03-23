@@ -75,7 +75,7 @@ var Util = {
 				serverurl : 'https://login.salesforce.com',
 				user : 'brent.gorton+brentdev1@cloudcoach.enterprise',
 				pass : 'Trojans.116v7vUnpJ43KsAgxJSmQxUqD7z',
-				maxPoll : 20,
+				maxPoll : 200,
 				pollWaitMillis : 10000
 			};
 		var taskName = 'dynamic';
@@ -89,7 +89,7 @@ var Util = {
 				serverurl : 'https://login.salesforce.com',
 				user : Util.getSFDCUser(),
 				pass : Util.getSFDCPass() + Util.getSFDCToken(),
-				maxPoll : 20,
+				maxPoll : 200,
 				pollWaitMillis : 10000
 		};
 		config.dynamic = {
