@@ -73,8 +73,8 @@ var Util = {
 		var config = grunt.config.get('antretrieve') || {};
 		config.options = {
 				serverurl : 'https://login.salesforce.com',
-				user : '',
-				pass : '',
+				user : Util.getSFDCUser(),
+				pass : Util.getSFDCPass() + Util.getSFDCToken(),
 				maxPoll : 200,
 				pollWaitMillis : 10000
 			};
@@ -96,7 +96,7 @@ var Util = {
 			options : {
 				root : path,
 				existingPackage : (existingPackage == undefined || existingPackage),
-				runAllTests : (runTests == undefined ? false : runTests)
+				runAllTests : (runTests == undefined ? false : runTests))
 			}
 		}
 		grunt.config.set('antdeploy', config);
