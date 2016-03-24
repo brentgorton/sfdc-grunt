@@ -6,27 +6,27 @@ var Util = {
 		token : ''
 	},
 	getSFDCUser : function(){
-		if(process.env.sfuser == null){
+		/*if(process.env.sfuser == null){*/
 			Util.login = grunt.file.readJSON('.config/login.json');
-		}else{
+		/*}else{
 			Util.login.user = process.env.sfuser;
-		}
+		}*/
 		return Util.login.user;
 	},
 	getSFDCPass : function(){
-		if(process.env.sfuser == null){
+		//if(process.env.sfuser == null){
 			Util.login = grunt.file.readJSON('.config/login.json');
-		}else{
+		/*}else{
 			Util.login.pw = process.env.sfpass;
-		}
+		}*/
 		return Util.login.pw;
 	},
 	getSFDCToken : function(){
-		if(process.env.sfuser == null){
+		//if(process.env.sfuser == null){
 			Util.login = grunt.file.readJSON('.config/login.json');
-		}else{
+		/*}else{
 			Util.login.token = process.env.sftoken;
-		}
+		}*/
 		return Util.login.token;
 	},
 	const : {
