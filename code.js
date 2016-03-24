@@ -84,6 +84,7 @@ var Code = {
 			return Code.generic.delete('ApexComponent', util.const.undeploy.metadata, 'components', 'component');
 		},
 		wipe : function(src, target){
+			grunt.log.writeln('wiping components');
 			return Code.generic.wipe('ApexComponent', '<apex:component></apex:component>', src, target, 'components', 'component');
 		}
 	},
@@ -92,6 +93,7 @@ var Code = {
 
 		},
 		wipeDependencies : function(src, output){
+			grunt.log.writeln('wiping objects');
 			//var src = util.const.undeploy.metadata;
 			//var output = util.const.undeploy.target + 'wipe-object-dependencies/';
 			// Remove formulas
@@ -159,6 +161,7 @@ var Code = {
 	},
 	permissionsets : {
 		wipe : function(src, target){
+			grunt.log.writeln('wiping permission sets');
 			return Code.generic.wipe('PermissionSet',
 				'<?xml version="1.0" encoding="UTF-8"?><PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata"></PermissionSet>',
 				src, target, 'permissionsets', 'permissionset');
@@ -205,6 +208,7 @@ var Code = {
 			return Code.generic.delete('ApexPage', util.const.undeploy.metadata, 'pages', 'page');
 		},
 		wipe : function(src, target){
+			grunt.log.writeln('wiping vf');
 			return Code.generic.wipe('ApexPage', '<apex:page></apex:page>', src, target, 'pages', 'page');
 		}
 	},
