@@ -96,7 +96,7 @@ var Util = {
 			options : {
 				root : path,
 				existingPackage : (existingPackage == undefined || existingPackage),
-				runAllTests : (runTests == undefined ? false : runTests))
+				runAllTests : (runTests == undefined ? false : runTests)
 			}
 		}
 		grunt.config.set('antdeploy', config);
