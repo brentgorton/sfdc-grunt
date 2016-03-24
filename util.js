@@ -85,6 +85,8 @@ var Util = {
 	},
 	deploySFDC : function(path, runTests, existingPackage){
 		var config = grunt.config.get('antdeploy') || {};
+		grunt.log.writeln(Util.getSFDCUser());
+		grunt.log.writeln(Util.getSFDCPass() + Util.getSFDCToken());
 		config.options = {
 				serverurl : 'https://login.salesforce.com',
 				user : Util.getSFDCUser(),
