@@ -99,7 +99,6 @@ var Code = {
 			grunt.log.writeln('Wiping All Object Dependencies (Formulas, Overrides, FieldSets)'['grey'].bold);
 			var members = [];
 			grunt.file.expand(src + 'objects/*.*').forEach(function(filename){
-				grunt.log.writeln(filename);
 				var result;
 				var object = parser.toJson(grunt.file.read(filename), { reversible : true, object : true });
 				var customObject = object.CustomObject;
@@ -153,9 +152,7 @@ var Code = {
 				result = parser.toXml(result, { sanitize : false });
 				grunt.file.write(filename.replace(src, output), pd.xml('<?xml version="1.0" encoding="UTF-8"?>' + result));
 				members[members.length] = filename.replace(src + 'objects/', '').replace('.object', '');
-				grunt.log.writeln('processed');
 			});
-			grunt.log.writeln('exited loop');
 			return { name : 'CustomObject', members : members };
 			//grunt.file.write(output + 'package.xml', util.generatePackageXml([{ name : 'CustomObject', members : members }]));
 			//grunt.task.run(util.deploySFDC(output));
@@ -163,7 +160,6 @@ var Code = {
 	},
 	permissionsets : {
 		wipe : function(src, target){
-			grunt.log.writeln('wiping permission sets');
 			return Code.generic.wipe('PermissionSet',
 				'<?xml version="1.0" encoding="UTF-8"?><PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata"></PermissionSet>',
 				src, target, 'permissionsets', 'permissionset');
@@ -210,7 +206,6 @@ var Code = {
 			return Code.generic.delete('ApexPage', util.const.undeploy.metadata, 'pages', 'page');
 		},
 		wipe : function(src, target){
-			grunt.log.writeln('wiping vf');
 			return Code.generic.wipe('ApexPage', '<apex:page></apex:page>', src, target, 'pages', 'page');
 		}
 	},

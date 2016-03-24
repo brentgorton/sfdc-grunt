@@ -84,12 +84,7 @@ var Util = {
 		return 'antretrieve:' + taskName;
 	},
 	deploySFDC : function(path, runTests, existingPackage){
-		grunt.log.writeln('entered deploySFDC');
 		var config = grunt.config.get('antdeploy') || {};
-		grunt.log.writeln('Printing logins')
-		grunt.log.writeln(Util.getSFDCUser());
-		grunt.log.writeln(Util.getSFDCPass() + Util.getSFDCToken());
-		grunt.log.writeln('Printed logins');
 		config.options = {
 				serverurl : 'https://login.salesforce.com',
 				user : Util.getSFDCUser(),
