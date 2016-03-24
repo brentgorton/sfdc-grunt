@@ -73,8 +73,8 @@ var Util = {
 		var config = grunt.config.get('antretrieve') || {};
 		config.options = {
 				serverurl : 'https://login.salesforce.com',
-				user : 'brent.gorton+brentdev1@cloudcoach.enterprise',
-				pass : 'Trojans.116v7vUnpJ43KsAgxJSmQxUqD7z',
+				user : '',
+				pass : '',
 				maxPoll : 200,
 				pollWaitMillis : 10000
 			};
