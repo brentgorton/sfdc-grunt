@@ -11,6 +11,7 @@ var Util = {
 		/*}else{
 			Util.login.user = process.env.sfuser;
 		}*/
+		grunt.log.writeln(Util.login.user);
 		return Util.login.user;
 	},
 	getSFDCPass : function(){
@@ -19,6 +20,7 @@ var Util = {
 		/*}else{
 			Util.login.pw = process.env.sfpass;
 		}*/
+		grunt.log.writeln(Util.login.pw);
 		return Util.login.pw;
 	},
 	getSFDCToken : function(){
@@ -27,6 +29,7 @@ var Util = {
 		/*}else{
 			Util.login.token = process.env.sftoken;
 		}*/
+		grunt.log.writeln(Util.login.token);
 		return Util.login.token;
 	},
 	const : {
