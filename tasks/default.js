@@ -38,10 +38,11 @@ grunt.registerTask('wipe-code', function(){
 	var output = util.const.undeploy.target + 'wipe-code/';
 	grunt.file.write(output + 'package.xml', util.generatePackageXml([
 		helper.components.wipe(src, output),
-		 helper.visualforce.wipe(src, output),
-		 helper.permissionsets.wipe(src, output),
-		 helper.objects.wipeDependencies(src, output)
+		helper.visualforce.wipe(src, output),
+		helper.permissionsets.wipe(src, output),
+		helper.objects.wipeDependencies(src, output)
 	]));
+	grunt.log.writeln('wrote package.xml');
 	grunt.task.run(util.deploySFDC(output));
 });
 grunt.registerTask('delete-code', function(){
