@@ -1,5 +1,5 @@
 var grunt = require('grunt');
-var metadata = require('./code.js');
+var metadata = require('./metadata.js');
 var constants = require('./const.js');
 var Util = {
 	metadata : metadata,

@@ -15,7 +15,6 @@ module.exports = function(util){
 			var objectData = parser.toJson(grunt.file.read(filename), {object : true, reversible : true});
 			objectData = objectData.CustomObject;
 			if(objectName.indexOf('__c') > 0){
-				//grunt.file.write(filename.replace(src, output), objectData);
 				objects[objects.length] = objectName;
 				if(objectData.fields != null){
 					for(var i = 0; i < objectData.fields.length; i++){
@@ -25,9 +24,6 @@ module.exports = function(util){
 					}
 				}
 			}
-
-		
-
 		});
 		grunt.file.write(output + 'package.xml', util.generatePackageXml([]));
 		grunt.file.write(output + 'destructiveChanges.xml', util.generatePackageXml([

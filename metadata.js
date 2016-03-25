@@ -1,10 +1,9 @@
 var grunt = require('grunt');
-var util = require('./util.js');
 var constants = require('./const.js');
 var parser = require('xml2json');
 var pd = require('pretty-data').pd;
 
-var Code = {
+var Metadata = {
 	apex : {
 		delete : function(){
 			grunt.log.writeln('Deleting Apex ')
@@ -221,4 +220,4 @@ var Code = {
 
 }
 
-module.exports = Code;
+module.exports = Metadata;
