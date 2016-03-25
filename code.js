@@ -1,6 +1,6 @@
 var grunt = require('grunt');
 var util = require('./util.js');
-var const = require('./const.js');
+var constants = require('./const.js');
 var parser = require('xml2json');
 var pd = require('pretty-data').pd;
 
@@ -8,7 +8,7 @@ var Code = {
 	apex : {
 		delete : function(){
 			grunt.log.writeln('Deleting Apex ')
-			return Code.generic.delete('ApexClass', const.undeploy.metadata, 'classes', 'cls');
+			return Code.generic.delete('ApexClass', constants.undeploy.metadata, 'classes', 'cls');
 		},
 		wipe : function(src, target){
 			return Code.generic.wipe('ApexClass', 'public class !NAME{ }', src, target, 'classes', 'cls');
@@ -16,12 +16,12 @@ var Code = {
 	},
 	app : {
 		delete : function(){
-			return Code.generic.delete('CustomApplication', const.undeploy.metadata, 'applications', 'app', ['Force_com']);
+			return Code.generic.delete('CustomApplication', constants.undeploy.metadata, 'applications', 'app', ['Force_com']);
 		}
 	},
 	fieldupdates : {
 		delete : function(){
-			var src = const.undeploy.metadata;
+			var src = constants.undeploy.metadata;
 			return { name : 'WorkflowFieldUpdate', members : Code.generic.getElements('Workflow','fieldUpdates', src, 'workflows', 'workflow') };
 		}
 	},
@@ -83,7 +83,7 @@ var Code = {
 	},
 	components : {
 		delete : function(){
-			return Code.generic.delete('ApexComponent', const.undeploy.metadata, 'components', 'component');
+			return Code.generic.delete('ApexComponent', constants.undeploy.metadata, 'components', 'component');
 		},
 		wipe : function(src, target){
 			grunt.log.writeln('wiping components');
@@ -95,8 +95,8 @@ var Code = {
 
 		},
 		wipeDependencies : function(src, output){
-			//var src = const.undeploy.metadata;
-			//var output = const.undeploy.target + 'wipe-object-dependencies/';
+			//var src = constants.undeploy.metadata;
+			//var output = constants.undeploy.target + 'wipe-object-dependencies/';
 			// Remove formulas
 			grunt.log.writeln('Wiping All Object Dependencies (Formulas, Overrides, FieldSets)'['grey'].bold);
 			var members = [];
@@ -169,7 +169,7 @@ var Code = {
 	},
 	quickactions : {
 		delete : function(){
-			var src = const.undeploy.metadata;
+			var src = constants.undeploy.metadata;
 			var pages = {};
 			var members = [];
 			grunt.file.expand(src + 'pages/*.page').forEach(function(filename){
@@ -190,22 +190,22 @@ var Code = {
 	},
 	staticresources : {
 		delete : function(){
-			return Code.generic.delete('StaticResource', const.undeploy.metadata, 'staticresources', 'resource');
+			return Code.generic.delete('StaticResource', constants.undeploy.metadata, 'staticresources', 'resource');
 		}
 	},
 	tabs : {
 		delete : function(){
-			return Code.generic.delete('CustomTab', const.undeploy.metadata, 'tabs', 'tab');
+			return Code.generic.delete('CustomTab', constants.undeploy.metadata, 'tabs', 'tab');
 		}
 	},
 	triggers : {
 		delete : function(){
-			return Code.generic.delete('ApexTrigger', const.undeploy.metadata, 'triggers', 'trigger');
+			return Code.generic.delete('ApexTrigger', constants.undeploy.metadata, 'triggers', 'trigger');
 		}
 	},
 	visualforce : {
 		delete : function(){
-			return Code.generic.delete('ApexPage', const.undeploy.metadata, 'pages', 'page');
+			return Code.generic.delete('ApexPage', constants.undeploy.metadata, 'pages', 'page');
 		},
 		wipe : function(src, target){
 			return Code.generic.wipe('ApexPage', '<apex:page></apex:page>', src, target, 'pages', 'page');
@@ -213,7 +213,7 @@ var Code = {
 	},
 	workflows : {
 		delete : function(){
-			var src = const.undeploy.metadata;
+			var src = constants.undeploy.metadata;
 			var workflows = [];
 			return { name : 'WorkflowRule', members : Code.generic.getElements('Workflow','rules', src, 'workflows', 'workflow') };
 		}

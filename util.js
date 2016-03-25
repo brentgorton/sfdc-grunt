@@ -1,6 +1,6 @@
 var grunt = require('grunt');
 var metadata = require('./code.js');
-var const = require('./const.js');
+var constants = require('./const.js');
 var Util = {
 	metadata : metadata,
 	login : {
@@ -32,7 +32,7 @@ var Util = {
 		}*/
 		return Util.login.token;
 	},
-	const : const,
+	const : constants,
 	generatePackageXml : function(types){
 		var response = '<?xml version="1.0" encoding="UTF-8"?>\n' +
 		'<Package xmlns="http://soap.sforce.com/2006/04/metadata">\n';
