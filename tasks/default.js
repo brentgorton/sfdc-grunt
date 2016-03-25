@@ -55,7 +55,7 @@ grunt.registerTask('sfdc-docs-build', function(){
 	grunt.file.write('apexdoc/src/staticresources/apexdoc.resource-meta.xml', '<StaticResource xmlns="http://soap.sforce.com/2006/04/metadata">\n' +
 		'<cacheControl>Public</cacheControl>\n' +
     	'<contentType>application/zip</contentType>\n' +
-    	'<description>jquery 1.10.2</description>\n' +
+    	'<description>Apex documentation</description>\n' +
 	'</StaticResource>');
 	grunt.task.run(['exec:buildDocs', 'zip:apexdoc', util.deploySFDC('apexdoc/', false, false), 'clean:apexdoc']);
 })
