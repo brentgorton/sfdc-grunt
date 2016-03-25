@@ -7,21 +7,21 @@ var Metadata = {
 	apex : {
 		delete : function(){
 			grunt.log.writeln('Deleting Apex ')
-			return Code.generic.delete('ApexClass', constants.undeploy.metadata, 'classes', 'cls');
+			return Metadata.generic.delete('ApexClass', constants.undeploy.metadata, 'classes', 'cls');
 		},
 		wipe : function(src, target){
-			return Code.generic.wipe('ApexClass', 'public class !NAME{ }', src, target, 'classes', 'cls');
+			return Metadata.generic.wipe('ApexClass', 'public class !NAME{ }', src, target, 'classes', 'cls');
 		}
 	},
 	app : {
 		delete : function(){
-			return Code.generic.delete('CustomApplication', constants.undeploy.metadata, 'applications', 'app', ['Force_com']);
+			return Metadata.generic.delete('CustomApplication', constants.undeploy.metadata, 'applications', 'app', ['Force_com']);
 		}
 	},
 	fieldupdates : {
 		delete : function(){
 			var src = constants.undeploy.metadata;
-			return { name : 'WorkflowFieldUpdate', members : Code.generic.getElements('Workflow','fieldUpdates', src, 'workflows', 'workflow') };
+			return { name : 'WorkflowFieldUpdate', members : Metadata.generic.getElements('Workflow','fieldUpdates', src, 'workflows', 'workflow') };
 		}
 	},
 	generic : {
@@ -82,11 +82,11 @@ var Metadata = {
 	},
 	components : {
 		delete : function(){
-			return Code.generic.delete('ApexComponent', constants.undeploy.metadata, 'components', 'component');
+			return Metadata.generic.delete('ApexComponent', constants.undeploy.metadata, 'components', 'component');
 		},
 		wipe : function(src, target){
 			grunt.log.writeln('wiping components');
-			return Code.generic.wipe('ApexComponent', '<apex:component></apex:component>', src, target, 'components', 'component');
+			return Metadata.generic.wipe('ApexComponent', '<apex:component></apex:component>', src, target, 'components', 'component');
 		}
 	},
 	objects : {
@@ -161,7 +161,7 @@ var Metadata = {
 	},
 	permissionsets : {
 		wipe : function(src, target){
-			return Code.generic.wipe('PermissionSet',
+			return Metadata.generic.wipe('PermissionSet',
 				'<?xml version="1.0" encoding="UTF-8"?><PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata"></PermissionSet>',
 				src, target, 'permissionsets', 'permissionset');
 		}
@@ -189,32 +189,32 @@ var Metadata = {
 	},
 	staticresources : {
 		delete : function(){
-			return Code.generic.delete('StaticResource', constants.undeploy.metadata, 'staticresources', 'resource');
+			return Metadata.generic.delete('StaticResource', constants.undeploy.metadata, 'staticresources', 'resource');
 		}
 	},
 	tabs : {
 		delete : function(){
-			return Code.generic.delete('CustomTab', constants.undeploy.metadata, 'tabs', 'tab');
+			return Metadata.generic.delete('CustomTab', constants.undeploy.metadata, 'tabs', 'tab');
 		}
 	},
 	triggers : {
 		delete : function(){
-			return Code.generic.delete('ApexTrigger', constants.undeploy.metadata, 'triggers', 'trigger');
+			return Metadata.generic.delete('ApexTrigger', constants.undeploy.metadata, 'triggers', 'trigger');
 		}
 	},
 	visualforce : {
 		delete : function(){
-			return Code.generic.delete('ApexPage', constants.undeploy.metadata, 'pages', 'page');
+			return Metadata.generic.delete('ApexPage', constants.undeploy.metadata, 'pages', 'page');
 		},
 		wipe : function(src, target){
-			return Code.generic.wipe('ApexPage', '<apex:page></apex:page>', src, target, 'pages', 'page');
+			return Metadata.generic.wipe('ApexPage', '<apex:page></apex:page>', src, target, 'pages', 'page');
 		}
 	},
 	workflows : {
 		delete : function(){
 			var src = constants.undeploy.metadata;
 			var workflows = [];
-			return { name : 'WorkflowRule', members : Code.generic.getElements('Workflow','rules', src, 'workflows', 'workflow') };
+			return { name : 'WorkflowRule', members : Metadata.generic.getElements('Workflow','rules', src, 'workflows', 'workflow') };
 		}
 	}
 

@@ -2,7 +2,6 @@ var grunt = require('grunt');
 var status = require('node-status');
 var util = require('../util.js');
 var undeployTasks = require('./undeploy/tasks.js');
-//var callbacks = require('../task.callbacks.js');
 require('./undeploy/init.js')();
 require('./docs/docs.js')();
 module.exports = function(){
