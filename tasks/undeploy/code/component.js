@@ -1,7 +1,6 @@
 var grunt = require('grunt');
 var parser = require('xml2json');
 var pd = require('pretty-data').pd;
-var helper = require('../../../code.js');
 
 module.exports = function(util){
 	grunt.registerTask('sfdc-wipe-components', function(){
