@@ -43,15 +43,15 @@ grunt.registerTask('sfdc-docs-build', function(){
 
 	config = grunt.config.get('zip') || {};
 	config.apexdoc = {
-		cwd : 'doc/ApexDocumentation/',
-		src : 'doc/ApexDocumentation/*',
-		dest : 'apexdoc/src/staticresources/apexdoc.resource',
+		cwd : 'apexdoc/ApexDocumentation/',
+		src : 'apexdoc/ApexDocumentation/*',
+		dest : 'apexdoc/src/staticresources/apexdoc.zip',
 		compression : 'DEFLATE',
 		base64 : true
 	}
 	grunt.config.set('zip', config);
 	config = grunt.config.get('clean') || {}
-	config.apexdoc = ['apexdoc', 'doc'];
+	config.apexdoc = ['apexdoc'];
 	grunt.config.set('clean', config);
 	grunt.file.write('apexdoc/src/staticresources/apexdoc.resource-meta.xml', '<StaticResource xmlns="http://soap.sforce.com/2006/04/metadata">\n' +
 		'<cacheControl>Public</cacheControl>\n' +
