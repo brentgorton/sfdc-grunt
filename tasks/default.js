@@ -1,7 +1,6 @@
 var grunt = require('grunt');
 var status = require('node-status');
 var util = require('../util.js');
-var helper = require('../code.js');
 var undeployTasks = require('./undeploy/tasks.js');
 //var callbacks = require('../task.callbacks.js');
 require('./undeploy/init.js')();
@@ -29,10 +28,10 @@ module.exports = function(){
 		var src = util.const.undeploy.metadata;
 		var output = util.const.undeploy.target + 'wipe-code/';
 		grunt.file.write(output + 'package.xml', util.generatePackageXml([
-			helper.components.wipe(src, output),
-			helper.visualforce.wipe(src, output),
-			helper.permissionsets.wipe(src, output),
-			helper.objects.wipeDependencies(src, output)
+			util.metadata.components.wipe(src, output),
+			util.metadata.visualforce.wipe(src, output),
+			util.metadata.permissionsets.wipe(src, output),
+			util.metadata.objects.wipeDependencies(src, output)
 		]));
 		grunt.log.writeln('wrote package.xml');
 		grunt.task.run(util.deploySFDC(output));
@@ -42,13 +41,13 @@ module.exports = function(){
 		var output = util.const.undeploy.target + 'delete-code-all/';
 		grunt.file.write(output + 'package.xml', util.generatePackageXml([]))
 		grunt.file.write(output + 'destructiveChanges.xml', util.generatePackageXml([
-			helper.apex.delete(),
-			helper.triggers.delete(),
-			helper.components.delete(),
-			helper.app.delete(),
-			helper.tabs.delete(),
-			helper.quickactions.delete(),
-			helper.workflows.delete()
+			util.metadata.apex.delete(),
+			util.metadata.triggers.delete(),
+			util.metadata.components.delete(),
+			util.metadata.app.delete(),
+			util.metadata.tabs.delete(),
+			util.metadata.quickactions.delete(),
+			util.metadata.workflows.delete()
 		]));
 		grunt.task.run(
 			util.deploySFDC(output)
@@ -59,8 +58,8 @@ module.exports = function(){
 		var output = util.const.undeploy.target + 'delete-code-final/';
 		grunt.file.write(output + 'package.xml', util.generatePackageXml([]))
 		grunt.file.write(output + 'destructiveChanges.xml', util.generatePackageXml([
-			helper.visualforce.delete(),
-			helper.staticresources.delete()
+			util.metadata.visualforce.delete(),
+			util.metadata.staticresources.delete()
 		]));
 		grunt.task.run(
 			util.deploySFDC(output)
