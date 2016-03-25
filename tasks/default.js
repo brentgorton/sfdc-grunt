@@ -52,6 +52,7 @@ grunt.registerTask('sfdc-docs-build', function(){
 	grunt.config.set('zip', config);
 	config = grunt.config.get('clean') || {}
 	config.apexdoc = ['apexdoc', 'doc'];
+	grunt.config.set('clean', config);
 	grunt.file.write('apexdoc/src/staticresources/apexdoc.resource-meta.xml', '<StaticResource xmlns="http://soap.sforce.com/2006/04/metadata">\n' +
 		'<cacheControl>Public</cacheControl>\n' +
     	'<contentType>application/zip</contentType>\n' +
