@@ -1,9 +1,9 @@
-/*var grunt = require('grunt');
-var util = require('../../../util.js');*/
+var grunt = require('grunt');
+//var util = require('../../../util.js');*/
 var parser = require('xml2json');
 var pd = require('pretty-data').pd;
 
-module.exports = function(grunt, util){
+module.exports = function(util){
 	grunt.registerTask('sfdc-delete-objects', function(src, output){
 		var src = util.const.undeploy.metadata;
 		var output = util.const.undeploy.target + 'delete-objects/';
