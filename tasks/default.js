@@ -42,6 +42,7 @@ grunt.registerTask('sfdc-docs-build', function(){
 	grunt.config.set('exec', config);
 	config = grunt.config.get('zip') || {};
 	config.apexdoc = {
+		cwd : 'apexdoc/ApexDocumentation/',
 		src : 'apexdoc/ApexDocumentation/*.html',
 		dest : 'test.zip',
 		compression : 'DEFLATE',
