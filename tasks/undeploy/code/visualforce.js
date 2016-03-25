@@ -4,7 +4,7 @@ var parser = require('xml2json');
 var pd = require('pretty-data').pd;
 var helper = require('../../../code.js');
 
-module.exports = function(grunt, util){
+module.exports = function(util){
 	grunt.registerTask('sfdc-wipe-visualforce', function(){
 		var src = util.const.undeploy.metadata;
 		var output = util.const.undeploy.target + 'wipe-code-visualforce/';
