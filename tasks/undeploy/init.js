@@ -19,6 +19,46 @@ module.exports = function(){
 	grunt.registerTask('sfdc-undeploy-init', function(){
 		grunt.task.run(util.retrieveSFDC(util.const.undeploy.metadata));
 	});
+	grunt.registerTask('sfdc-wipe-code', function(){
+		var src = util.const.undeploy.metadata;
+		var output = util.const.undeploy.target + 'wipe-code/';
+		grunt.file.write(output + 'package.xml', util.generatePackageXml([
+			util.metadata.components.wipe(src, output),
+			util.metadata.visualforce.wipe(src, output),
+			util.metadata.permissionsets.wipe(src, output),
+			util.metadata.objects.wipeDependencies(src, output)
+		]));
+		grunt.log.writeln('wrote package.xml');
+		grunt.task.run(util.deploySFDC(output));
+	});
 
+	grunt.registerTask('sfdc-delete-code', function(){
+		var output = util.const.undeploy.target + 'delete-code-all/';
+		grunt.file.write(output + 'package.xml', util.generatePackageXml([]))
+		grunt.file.write(output + 'destructiveChanges.xml', util.generatePackageXml([
+			util.metadata.apex.delete(),
+			util.metadata.triggers.delete(),
+			util.metadata.components.delete(),
+			util.metadata.app.delete(),
+			util.metadata.tabs.delete(),
+			util.metadata.quickactions.delete(),
+			util.metadata.workflows.delete()
+		]));
+		grunt.task.run(
+			util.deploySFDC(output)
+		)
+	});
+
+	grunt.registerTask('sfdc-delete-code-final', function(){
+		var output = util.const.undeploy.target + 'delete-code-final/';
+		grunt.file.write(output + 'package.xml', util.generatePackageXml([]))
+		grunt.file.write(output + 'destructiveChanges.xml', util.generatePackageXml([
+			util.metadata.visualforce.delete(),
+			util.metadata.staticresources.delete()
+		]));
+		grunt.task.run(
+			util.deploySFDC(output)
+		)
+	});
 	grunt.loadNpmTasks('grunt-ant-sfdc-purge');
 }
