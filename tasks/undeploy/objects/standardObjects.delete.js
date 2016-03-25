@@ -3,7 +3,7 @@ var grunt = require('grunt');
 var parser = require('xml2json');
 var pd = require('pretty-data').pd;
 
-module.exports = function(grunt, util){
+module.exports = function(util){
 	var standardObjectFields = {
 		FieldSet : {
 			User : ['Record_Details']
