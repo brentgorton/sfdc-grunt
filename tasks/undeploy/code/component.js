@@ -8,7 +8,7 @@ module.exports = function(util){
 	grunt.registerTask('sfdc-wipe-components', function(){
 		var src = util.const.undeploy.metadata;
 		var output = util.const.undeploy.target + 'wipe-code-components/';
-		helper.components.wipe(src, output);
+		util.metadata.components.wipe(src, output);
 		/*
 		grunt.file.expand(src + 'components/*.component').forEach(function(filename){
 			var componentName = filename.replace(src + 'components/', '').replace('.component','');
@@ -25,7 +25,7 @@ module.exports = function(util){
 	grunt.registerTask('sfdc-delete-components', function(){
 		var output = util.const.undeploy.target + 'delete-code-components/';
 		grunt.file.write(output + 'package.xml', util.generatePackageXml([]))
-		grunt.file.write(output + 'destructiveChanges.xml', util.generatePackageXml([helper.components.delete()]));
+		grunt.file.write(output + 'destructiveChanges.xml', util.generatePackageXml([util.metadata.components.delete()]));
 		grunt.task.run(
 			util.deploySFDC(output)
 		)

@@ -19,7 +19,7 @@ module.exports = function(util){
 			{ name : 'ApexPage', members : ['*'] }
 		]));
 		*/
-		helper.visualforce.wipe(src, output);
+		util.metadata.visualforce.wipe(src, output);
 		grunt.file.write(output + 'package.xml', util.generatePackageXml([
 			{ name : 'ApexPage', members : ['*'] }
 		]));
@@ -29,7 +29,7 @@ module.exports = function(util){
 	grunt.registerTask('sfdc-delete-visualforce', function(){
 		var output = util.const.undeploy.target + 'delete-code-visualforce/';
 		grunt.file.write(output + 'package.xml', util.generatePackageXml([]))
-		grunt.file.write(output + 'destructiveChanges.xml', util.generatePackageXml([helper.visualforce.delete()]));
+		grunt.file.write(output + 'destructiveChanges.xml', util.generatePackageXml([util.metadata.visualforce.delete()]));
 		grunt.task.run(
 			util.deploySFDC(output)
 		)

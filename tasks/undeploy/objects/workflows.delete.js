@@ -67,7 +67,7 @@ module.exports = function(util){
 			grunt.task.run(tasks);
 		}*/
 		grunt.file.write(output + 'package.xml', util.generatePackageXml([]));
-		grunt.file.write(output + 'destructiveChanges.xml', util.generatePackageXml([ helper.fieldupdates.delete()]));
+		grunt.file.write(output + 'destructiveChanges.xml', util.generatePackageXml([ util.metadata.fieldupdates.delete()]));
 		grunt.task.run(util.deploySFDC(output));
 	});
 }
