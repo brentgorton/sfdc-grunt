@@ -25,12 +25,23 @@ grunt.registerTask('sfdc-deploy', function(){
 });
 
 grunt.registerTask('sfdc-deploy-test', function(){
-	/*
-	grunt.file.mkdir(util.const.undeploy + 'tests/');
-	grunt.task.run(util.deploySFDC(util.const.undeploy + 'tests/', true));
-	*/
 	grunt.task.run(util.deploySFDC('src/', true));
 });
+
+grunt.registerTask('sfdc-docs-generate', function(){
+	grunt.task.run([util.getApexdoc, 'sfdc-docs-build'])
+});
+
+grunt.registerTask('sfdc-docs-build', function(){
+	var config = grunt.config.get('exec') || {}
+	config.buildDocs = 'curl -s https://github.com/SalesforceFoundation/ApexDoc/releases/download/1.1.5/apexdoc.jar | grep -Eo \'(http|https)://[^"]+\' > .tmp.url' +
+					   ' && mkdir -p lib' +
+					   ' && sed \'s/\&amp;/\&/g\' .tmp.url' +
+					   ' | xargs curl -o lib/apexdoc.jar && rm .tmp.url' +
+					   ' && java -jar lib/apexdoc.jar -s \'src/classes\' -t \'apexdoc\' -p \'global;public;private;testmethod;webService\''
+	grunt.config.set('exec', config);
+	grunt.task.run('exec:buildDocs')
+})
 
 
 grunt.registerTask('wipe-code', function(){
@@ -73,4 +84,6 @@ grunt.registerTask('delete-code-final', function(){
 	)
 });
 grunt.loadNpmTasks('grunt-contrib-clean');
+grunt.loadNpmTasks('grunt-wget');
+grunt.loadNpmTasks('grunt-exec');
 }

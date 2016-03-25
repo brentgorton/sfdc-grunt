@@ -104,6 +104,16 @@ var Util = {
 		}
 		grunt.config.set('antdeploy', config);
 		return 'antdeploy:dynamic';
+	},
+	getApexdoc : function(){
+		var config = grunt.config.get('wget') || {};
+		config.apexdoc = {
+			files : {
+				'lib/apexdoc.jar' : 'https://github.com/SalesforceFoundation/ApexDoc/releases/download/1.1.5/apexdoc.jar'
+			}
+		}
+		grunt.config.set('wget', config);
+		return 'wget:apexdoc';
 	}
 }
 
