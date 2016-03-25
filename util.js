@@ -86,12 +86,12 @@ var Util = {
 		grunt.config.set('antretrieve', config);
 		return 'antretrieve:' + taskName;
 	},
-	deploySFDC : function(path, runTests, existingPackage){
+	deploySFDC : function(path, runTests, existingPackage, login){
 		var config = grunt.config.get('antdeploy') || {};
 		config.options = {
 				serverurl : 'https://login.salesforce.com',
-				user : Util.getSFDCUser(),
-				pass : Util.getSFDCPass() + Util.getSFDCToken(),
+				user : (login == undefined ? Util.getSFDCUser() : login.user),
+				pass : (login == undefined ? Util.getSFDCPass() + Util.getSFDCToken() : login.pw + login.token),
 				maxPoll : 200,
 				pollWaitMillis : 10000
 		};
@@ -104,16 +104,6 @@ var Util = {
 		}
 		grunt.config.set('antdeploy', config);
 		return 'antdeploy:dynamic';
-	},
-	getApexdoc : function(){
-		var config = grunt.config.get('wget') || {};
-		config.apexdoc = {
-			files : {
-				'lib/apexdoc.jar' : 'https://github.com/SalesforceFoundation/ApexDoc/releases/download/1.1.5/apexdoc.jar'
-			}
-		}
-		grunt.config.set('wget', config);
-		return 'wget:apexdoc';
 	}
 }
 

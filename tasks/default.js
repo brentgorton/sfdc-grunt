@@ -5,7 +5,7 @@ var helper = require('../code.js');
 var undeployTasks = require('./undeploy/tasks.js');
 var callbacks = require('../task.callbacks.js');
 require('./undeploy/init.js')();
-
+require('docs/docs.js')();
 module.exports = function(){
 //grunt.task.loadTasks('./tasks/undeploy');
 var cleanConfig = grunt.config.get('clean') || {};
@@ -28,39 +28,7 @@ grunt.registerTask('sfdc-deploy-test', function(){
 	grunt.task.run(util.deploySFDC('src/', true));
 });
 
-grunt.registerTask('sfdc-docs-generate', function(){
-	grunt.task.run([util.getApexdoc, 'sfdc-docs-build'])
-});
 
-grunt.registerTask('sfdc-docs-build', function(){
-	var config = grunt.config.get('exec') || {}
-	config.buildDocs = 'curl -s https://github.com/SalesforceFoundation/ApexDoc/releases/download/1.1.5/apexdoc.jar | grep -Eo \'(http|https)://[^"]+\' > .tmp.url' +
-					   ' && mkdir -p lib' +
-					   ' && sed \'s/\\&amp;/\\&/g\' .tmp.url' +
-					   ' | xargs curl -o lib/apexdoc.jar && rm .tmp.url' +
-					   ' && java -jar lib/apexdoc.jar -s \'src/classes\' -t \'apexdoc\' -p \'global;public;private;testmethod;webService\''
-	grunt.config.set('exec', config);
-
-	config = grunt.config.get('zip') || {};
-	config.apexdoc = {
-		cwd : 'apexdoc/ApexDocumentation/',
-		src : 'apexdoc/ApexDocumentation/*',
-		dest : 'apexdoc/src/staticresources/apexdoc.resource',
-		compression : 'DEFLATE',
-		base64 : true
-	}
-	grunt.config.set('zip', config);
-	config = grunt.config.get('clean') || {}
-	config.apexdoc = ['apexdoc'];
-	grunt.config.set('clean', config);
-	grunt.file.write('apexdoc/src/staticresources/apexdoc.resource-meta.xml', '<StaticResource xmlns="http://soap.sforce.com/2006/04/metadata">\n' +
-		'<cacheControl>Public</cacheControl>\n' +
-    	'<contentType>application/zip</contentType>\n' +
-    	'<description>Apex documentation</description>\n' +
-	'</StaticResource>');
-	grunt.file.write('apexdoc/src/package.xml', util.generatePackageXml([{ members : ['*'], name : 'StaticResource' }]));
-	grunt.task.run(['exec:buildDocs', 'zip:apexdoc', util.deploySFDC('apexdoc/src/', false)]);
-})
 
 
 grunt.registerTask('wipe-code', function(){
@@ -75,6 +43,7 @@ grunt.registerTask('wipe-code', function(){
 	grunt.log.writeln('wrote package.xml');
 	grunt.task.run(util.deploySFDC(output));
 });
+
 grunt.registerTask('delete-code', function(){
 	var output = util.const.undeploy.target + 'delete-code-all/';
 	grunt.file.write(output + 'package.xml', util.generatePackageXml([]))
@@ -91,6 +60,7 @@ grunt.registerTask('delete-code', function(){
 		util.deploySFDC(output)
 	)
 });
+
 grunt.registerTask('delete-code-final', function(){
 	var output = util.const.undeploy.target + 'delete-code-final/';
 	grunt.file.write(output + 'package.xml', util.generatePackageXml([]))
