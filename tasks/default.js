@@ -5,9 +5,9 @@ var helper = require('../code.js');
 var undeployTasks = require('./undeploy/tasks.js');
 var callbacks = require('../task.callbacks.js');
 require('./undeploy/init.js')();
-
+require('./docs/docs.js')();
 module.exports = function(){
-	require('./docs/docs.js')();
+	
 //grunt.task.loadTasks('./tasks/undeploy');
 var cleanConfig = grunt.config.get('clean') || {};
 cleanConfig.undeploy = [util.const.undeploy.root];

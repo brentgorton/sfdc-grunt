@@ -1,6 +1,6 @@
 var grunt = require('grunt');
 var util = require('../../util.js');
-module.export = function(){
+module.exports = function(){
 	grunt.registerTask('sfdc-docs-build', function(){
 		var config = grunt.config.get('exec') || {}
 		config.buildDocs = 'curl -s https://github.com/SalesforceFoundation/ApexDoc/releases/download/1.1.5/apexdoc.jar | grep -Eo \'(http|https)://[^"]+\' > .tmp.url' +
