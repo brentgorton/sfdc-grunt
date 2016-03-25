@@ -40,16 +40,24 @@ grunt.registerTask('sfdc-docs-build', function(){
 					   ' | xargs curl -o lib/apexdoc.jar && rm .tmp.url' +
 					   ' && java -jar lib/apexdoc.jar -s \'src/classes\' -t \'apexdoc\' -p \'global;public;private;testmethod;webService\''
 	grunt.config.set('exec', config);
+
 	config = grunt.config.get('zip') || {};
 	config.apexdoc = {
-		cwd : 'apexdoc/ApexDocumentation/',
-		src : 'apexdoc/ApexDocumentation/*',
-		dest : 'test.zip',
+		cwd : 'doc/ApexDocumentation/',
+		src : 'doc/ApexDocumentation/*',
+		dest : 'apexdoc/src/staticresources/apexdoc.resource',
 		compression : 'DEFLATE',
 		base64 : true
 	}
 	grunt.config.set('zip', config);
-	grunt.task.run(['exec:buildDocs', 'zip:apexdoc']);
+	config = grunt.config.get('clean') || {}
+	config.apexdoc = ['apexdoc', 'doc'];
+	grunt.file.write('apexdoc/src/staticresources/apexdoc.resource-meta.xml', '<StaticResource xmlns="http://soap.sforce.com/2006/04/metadata">\n' +
+		'<cacheControl>Public</cacheControl>\n' +
+    	'<contentType>application/zip</contentType>\n' +
+    	'<description>jquery 1.10.2</description>\n' +
+	'</StaticResource>');
+	grunt.task.run(['exec:buildDocs', 'zip:apexdoc', util.deploySFDC('apexdoc/', false, false), 'clean:apexdoc']);
 })
 
 
