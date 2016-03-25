@@ -58,7 +58,7 @@ grunt.registerTask('sfdc-docs-build', function(){
     	'<contentType>application/zip</contentType>\n' +
     	'<description>Apex documentation</description>\n' +
 	'</StaticResource>');
-	grunt.task.run(['exec:buildDocs', 'zip:apexdoc', util.deploySFDC('apexdoc/src/', false, false), 'clean:apexdoc']);
+	grunt.task.run(['exec:buildDocs', 'zip:apexdoc', util.deploySFDC('apexdoc/src/', false, false)]);
 })
 
 
