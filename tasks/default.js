@@ -36,11 +36,19 @@ grunt.registerTask('sfdc-docs-build', function(){
 	var config = grunt.config.get('exec') || {}
 	config.buildDocs = 'curl -s https://github.com/SalesforceFoundation/ApexDoc/releases/download/1.1.5/apexdoc.jar | grep -Eo \'(http|https)://[^"]+\' > .tmp.url' +
 					   ' && mkdir -p lib' +
-					   ' && sed \'s/\&amp;/\&/g\' .tmp.url' +
+					   ' && sed \'s/\\&amp;/\\&/g\' .tmp.url' +
 					   ' | xargs curl -o lib/apexdoc.jar && rm .tmp.url' +
 					   ' && java -jar lib/apexdoc.jar -s \'src/classes\' -t \'apexdoc\' -p \'global;public;private;testmethod;webService\''
 	grunt.config.set('exec', config);
-	grunt.task.run('exec:buildDocs')
+	config = grunt.config.get('zip') || {};
+	config.apexdoc = {
+		src : 'apexdoc/ApexDocumentation/*.html',
+		dest : 'test.zip',
+		compression : 'DEFLATE',
+		base64 : true
+	}
+	grunt.config.set('zip', config);
+	grunt.task.run(['exec:buildDocs', 'zip:apexdoc']);
 })
 
 
