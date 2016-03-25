@@ -1,9 +1,9 @@
-var grunt = require('grunt');
-var util = require('../../../util.js');
+/*var grunt = require('grunt');
+var util = require('../../../util.js');*/
 var parser = require('xml2json');
 var pd = require('pretty-data').pd;
 
-module.exports = function(){
+module.exports = function(grunt, util){
 	var standardObjectFields = {
 		FieldSet : {
 			User : ['Record_Details']

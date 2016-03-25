@@ -1,10 +1,10 @@
-var grunt = require('grunt');
-var util = require('../../../util.js');
+/*var grunt = require('grunt');
+var util = require('../../../util.js');*/
 var parser = require('xml2json');
 var pd = require('pretty-data').pd;
 var helper = require('../../../code.js');
 
-module.exports = function(){
+module.exports = function(grunt, util){
 	grunt.registerTask('sfdc-delete-object-workflows', function(){
 		var output = util.const.undeploy.target + 'delete-object-workflows/';
 		/*
