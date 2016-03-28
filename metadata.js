@@ -170,7 +170,7 @@ var Metadata = {
 			for(var i = 0; i < types.length; i++){
 				var type = types[i];
 				var toDelete = [];
-				grunt.file.expand(src + type.path + '/*.' + type.ext, function(filename){
+				grunt.file.expand([src + type.path + '/*.' + type.ext], function(filename){
 					if(grunt.file.exists(filename.replace(src, target))){
 
 					}else{
