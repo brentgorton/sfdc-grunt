@@ -171,9 +171,11 @@ var Metadata = {
 				var type = types[i];
 				var toDelete = [];
 				grunt.file.expand([src + type.path + '/*.' + type.ext], function(filename){
+					grunt.log.writeln(filename.replace(src, target));
 					if(grunt.file.exists(filename.replace(src, target))){
 
 					}else{
+						grunt.log.writeln('Found file to delete ' + filename.replace('.' + type.ext, ''));
 						toDelete[toDelete.length] = filename.replace('.' + type.ext,'');
 					}
 				});
