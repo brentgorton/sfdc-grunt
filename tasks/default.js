@@ -3,6 +3,7 @@ var status = require('node-status');
 var util = require('../util.js');
 var undeployTasks = require('./undeploy/tasks.js');
 require('./undeploy/init.js')();
+require('./packaging/init.js')();
 require('./docs/docs.js')();
 module.exports = function(){
 	var cleanConfig = grunt.config.get('clean') || {};

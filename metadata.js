@@ -159,6 +159,30 @@ var Metadata = {
 			//grunt.task.run(util.deploySFDC(output));
 		}
 	},
+	packaging : {
+		generateDestructive : function(src, target){
+			var types = [{ path : 'classes', ext : 'cls', type : 'ApexClass' },
+						 { path : 'pages', ext : 'page', type : 'ApexPage' },
+						 { path : 'components', ext : 'component', type : 'ApexComponent' },
+						 { path : 'triggers', ext : 'trigger', type : 'ApexTrigger' }
+						];
+			var metadata = [];
+			for(var i = 0; i < types.length; i++){
+				var type = types[i];
+				var toDelete = [];
+				grunt.file.expand(src + type.path + '/*.' + type.ext, function(filename){
+					if(grunt.file.exists(filename.replace(src, target))){
+
+					}else{
+						toDelete[toDelete.length] = filename.replace('.' + type.ext,'');
+					}
+				});
+				if(toDelete.length > 0){
+					metadata[metadata.length] = { name : type.type, members : toDelete };
+				}
+			}
+		}
+	},
 	permissionsets : {
 		wipe : function(src, target){
 			return Metadata.generic.wipe('PermissionSet',
