@@ -181,6 +181,7 @@ var Metadata = {
 					metadata[metadata.length] = { name : type.type, members : toDelete };
 				}
 			}
+			return metadata;
 		}
 	},
 	permissionsets : {
