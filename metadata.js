@@ -177,7 +177,7 @@ var Metadata = {
 
 					}else{
 						grunt.log.writeln('Found file to delete ' + filename.replace('.' + type.ext, ''));
-						toDelete[toDelete.length] = filename.replace(src + type.path + '/').replace('.' + type.ext,'');
+						toDelete[toDelete.length] = filename.replace(src + type.path + '/', '').replace('.' + type.ext,'');
 					}
 				});
 				if(toDelete.length > 0){
