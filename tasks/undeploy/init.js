@@ -21,12 +21,12 @@ module.exports = function(){
 	});
 
 	grunt.registerTask('sfdc-clear-metadata', function(){
+		var src = util.const.undeploy.metadata;
+		var output;
 		grunt.task
 		.run(util.retrieveSFDC(util.const.undeploy.metadata))
 		.then(function(){
 			grunt.log.writeln('Deleting code components - Stage 1');
-			var done = this.async();
-			var src = util.const.undeploy.metadata;
 			var output = util.const.undeploy.target + 'wipe-code/';
 			grunt.file.write(output + 'package.xml', util.generatePackageXml([
 				util.metadata.components.wipe(src, output),
@@ -34,26 +34,22 @@ module.exports = function(){
 				util.metadata.permissionsets.wipe(src, output),
 				util.metadata.objects.wipeDependencies(src, output)
 			]))
-			grunt.task.run(util.deploySFDC(output))
-			.then(function(){
-				output = util.const.undeploy.target + 'delete-code-all/';
-				grunt.file.write(output + 'package.xml', util.generatePackageXml([]))
-				grunt.file.write(output + 'destructiveChanges.xml', util.generatePackageXml([
-					util.metadata.apex.delete(),
-					util.metadata.triggers.delete(),
-					util.metadata.components.delete(),
-					util.metadata.app.delete(),
-					util.metadata.tabs.delete(),
-					util.metadata.quickactions.delete(),
-					util.metadata.workflows.delete()
-				]));
-				grunt.task.run(util.deploySFDC(output))
-				.then(function(){
-					done();
-				})
-			})
-
 		})
+		.run(util.deploySFDC(output))
+		.then(function(){
+			output = util.const.undeploy.target + 'delete-code-all/';
+			grunt.file.write(output + 'package.xml', util.generatePackageXml([]))
+			grunt.file.write(output + 'destructiveChanges.xml', util.generatePackageXml([
+				util.metadata.apex.delete(),
+				util.metadata.triggers.delete(),
+				util.metadata.components.delete(),
+				util.metadata.app.delete(),
+				util.metadata.tabs.delete(),
+				util.metadata.quickactions.delete(),
+				util.metadata.workflows.delete()
+			]));
+		})
+		.run(util.deploySFDC(output));
 	});
 
 	grunt.registerTask('sfdc-wipe-code', function(){
