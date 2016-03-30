@@ -25,6 +25,7 @@ module.exports = function(){
 		grunt.task
 		.run(util.retrieveSFDC(util.const.undeploy.metadata))
 		.then(function(){
+			var done = this.async();
 			grunt.log.writeln('Deleting code components - Stage 1');
 			var output = util.const.undeploy.target + 'wipe-code/';
 			grunt.file.write(output + 'package.xml', util.generatePackageXml([
@@ -33,18 +34,26 @@ module.exports = function(){
 				util.metadata.permissionsets.wipe(src, output),
 				util.metadata.objects.wipeDependencies(src, output)
 			]));
+			grunt.task.run(util.deploySFDC(util.const.undeploy.target + 'wipe-code/'))
+			.then(function(){
+				output = util.const.undeploy.target + 'delete-code-all/';
+				grunt.file.write(output + 'package.xml', util.generatePackageXml([]))
+				grunt.file.write(output + 'destructiveChanges.xml', util.generatePackageXml([
+					util.metadata.apex.delete(),
+					util.metadata.triggers.delete(),
+					util.metadata.components.delete(),
+					util.metadata.app.delete(),
+					util.metadata.tabs.delete(),
+					util.metadata.quickactions.delete(),
+					util.metadata.workflows.delete()
+				]));
+				grunt.task.run(util.deploySFDC(util.const.undeploy.target + 'delete-code-all/'))
+				.then(function(){
+					done();
+				})
 
-			output = util.const.undeploy.target + 'delete-code-all/';
-			grunt.file.write(output + 'package.xml', util.generatePackageXml([]))
-			grunt.file.write(output + 'destructiveChanges.xml', util.generatePackageXml([
-				util.metadata.apex.delete(),
-				util.metadata.triggers.delete(),
-				util.metadata.components.delete(),
-				util.metadata.app.delete(),
-				util.metadata.tabs.delete(),
-				util.metadata.quickactions.delete(),
-				util.metadata.workflows.delete()
-			]));
+			})
+
 		})
 		.run([util.deploySFDC(util.const.undeploy.target + 'wipe-code/')]);
 	});
