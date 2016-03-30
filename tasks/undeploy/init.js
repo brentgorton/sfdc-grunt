@@ -22,7 +22,6 @@ module.exports = function(){
 
 	grunt.registerTask('sfdc-clear-metadata', function(){
 		var src = util.const.undeploy.metadata;
-		var output;
 		grunt.task
 		.run(util.retrieveSFDC(util.const.undeploy.metadata))
 		.then(function(){
@@ -34,7 +33,7 @@ module.exports = function(){
 				util.metadata.permissionsets.wipe(src, output),
 				util.metadata.objects.wipeDependencies(src, output)
 			]));
-			
+
 			output = util.const.undeploy.target + 'delete-code-all/';
 			grunt.file.write(output + 'package.xml', util.generatePackageXml([]))
 			grunt.file.write(output + 'destructiveChanges.xml', util.generatePackageXml([
@@ -47,7 +46,7 @@ module.exports = function(){
 				util.metadata.workflows.delete()
 			]));
 		})
-		.run([util.deploySFDC(util.const.undeploy.target + 'wipe-code/'), util.deploySFDC(util.const.undeploy.target + 'delete-code-all/')]);
+		.run([util.deploySFDC(util.const.undeploy.target + 'wipe-code/')]);
 	});
 
 	grunt.registerTask('sfdc-wipe-code', function(){
