@@ -24,10 +24,10 @@ module.exports = function(){
 		var src = util.const.undeploy.metadata;
 		var output;
 		grunt.task
-		.run(util.retrieveSFDC(util.const.undeploy.metadata))
+		//.run(util.retrieveSFDC(util.const.undeploy.metadata))
 		.then(function(){
 			grunt.log.writeln('Deleting code components - Stage 1');
-			var output = util.const.undeploy.target + 'wipe-code/';
+			output = util.const.undeploy.target + 'wipe-code/';
 			grunt.file.write(output + 'package.xml', util.generatePackageXml([
 				util.metadata.components.wipe(src, output),
 				util.metadata.visualforce.wipe(src, output),
