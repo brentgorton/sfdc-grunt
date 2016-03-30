@@ -27,6 +27,7 @@ module.exports = function(){
 		//.run(util.retrieveSFDC(util.const.undeploy.metadata))
 		.then(function(){
 			grunt.log.writeln('Deleting code components - Stage 1');
+			util.const.currentPath = util.const.undeploy.target + 'wipe-code/';
 			output = util.const.undeploy.target + 'wipe-code/';
 			grunt.file.write(output + 'package.xml', util.generatePackageXml([
 				util.metadata.components.wipe(src, output),
@@ -35,7 +36,7 @@ module.exports = function(){
 				util.metadata.objects.wipeDependencies(src, output)
 			]))
 		})
-		.run(util.deploySFDC(output))
+		.run(util.deploySFDC(util.const.currentPath))
 		.then(function(){
 			output = util.const.undeploy.target + 'delete-code-all/';
 			grunt.file.write(output + 'package.xml', util.generatePackageXml([]))
