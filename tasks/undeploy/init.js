@@ -35,7 +35,7 @@ module.exports = function(){
 				util.metadata.objects.wipeDependencies(src, output)
 			]))
 		})
-		.run(util.deploySFDC(util.const.undeploy.target + 'wipe-code/';))
+		.run(util.deploySFDC(util.const.undeploy.target + 'wipe-code/'))
 		.then(function(){
 			output = util.const.undeploy.target + 'delete-code-all/';
 			grunt.file.write(output + 'package.xml', util.generatePackageXml([]))
