@@ -6,7 +6,6 @@ var pd = require('pretty-data').pd;
 var Metadata = {
 	apex : {
 		delete : function(){
-			grunt.log.writeln('Deleting Apex ')
 			return Metadata.generic.delete('ApexClass', constants.undeploy.metadata, 'classes', 'cls');
 		},
 		wipe : function(src, target){
@@ -94,8 +93,6 @@ var Metadata = {
 
 		},
 		wipeDependencies : function(src, output){
-			//var src = constants.undeploy.metadata;
-			//var output = constants.undeploy.target + 'wipe-object-dependencies/';
 			// Remove formulas
 			grunt.log.writeln('Wiping All Object Dependencies (Formulas, Overrides, FieldSets)'['grey'].bold);
 			var members = [];
@@ -155,8 +152,6 @@ var Metadata = {
 				members[members.length] = filename.replace(src + 'objects/', '').replace('.object', '');
 			});
 			return { name : 'CustomObject', members : members };
-			//grunt.file.write(output + 'package.xml', util.generatePackageXml([{ name : 'CustomObject', members : members }]));
-			//grunt.task.run(util.deploySFDC(output));
 		}
 	},
 	packaging : {
