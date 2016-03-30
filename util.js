@@ -89,7 +89,14 @@ var Util = {
 				maxPoll : 200,
 				pollWaitMillis : 10000
 		};
-		config.dynamic = {
+		var deployName = 'deploy_0';
+		for(var i = 0; i < 1000; i++){
+			if(!config.hasOwnProperty('deploy_' + i))
+				deployName = 'deploy_' + i;
+				break;
+			}
+		}
+		config[deployName] = {
 			options : {
 				root : path,
 				existingPackage : (existingPackage == undefined || existingPackage),
@@ -97,7 +104,7 @@ var Util = {
 			}
 		}
 		grunt.config.set('antdeploy', config);
-		return 'antdeploy:dynamic';
+		return 'antdeploy:' + deployName;
 	}
 }
 
