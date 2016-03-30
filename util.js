@@ -91,7 +91,7 @@ var Util = {
 		};
 		var deployName = 'deploy_0';
 		for(var i = 0; i < 1000; i++){
-			if(!config.hasOwnProperty('deploy_' + i))
+			if(!config.hasOwnProperty('deploy_' + i)){
 				deployName = 'deploy_' + i;
 				break;
 			}
