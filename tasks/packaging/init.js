@@ -2,10 +2,14 @@ var grunt = require('grunt');
 var util = require('../../util.js');
 var metadata = require('../../metadata.js');
 module.exports = function(){
-	grunt.registerTask('sfdc-packaging-deploy', ['sfdc-packaging-cleanup', util.deploySFDC('src/', true)])
+	grunt.registerTask('sfdc-packaging-deploy', ['sfdc-packaging-cleanup', 'sfdc-packaging-write']);
+	
 	grunt.registerTask('sfdc-packaging-cleanup', function(){
 		grunt.task.run([util.retrieveSFDC(util.const.undeploy.metadata), 'sfdc-packaging-destructive']);
 	});
+	grunt.registerTask('sfdc-packaging-write', function(){
+		grunt.task.run(util.deploySFDC('src/', true));
+	})
 
 	grunt.registerTask('sfdc-packaging-destructive', function(){
 		grunt.file.write('src/destructiveChanges.xml', util.generatePackageXml(metadata.packaging.generateDestructive(util.const.undeploy.metadata, 'src/')));
