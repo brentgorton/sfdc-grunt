@@ -101,7 +101,12 @@ var Util = {
 			options : {
 				root : path,
 				existingPackage : (existingPackage == undefined || existingPackage),
-				runAllTests : (runTests == undefined ? false : runTests)
+				runAllTests : (runTests == undefined ? false : runTests),
+				serverurl : 'https://login.salesforce.com',
+				user : Util.getSFDCUser(),
+				pass : Util.getSFDCPass() + Util.getSFDCToken(),
+				maxPoll : 200,
+				pollWaitMillis : 10000
 			}
 		}
 		grunt.config.set('antdeploy', config);
