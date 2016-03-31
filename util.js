@@ -85,8 +85,8 @@ var Util = {
 		var config = grunt.config.get('antdeploy') || {};
 		config.options = {
 				serverurl : 'https://login.salesforce.com',
-				user : (login == undefined ? Util.getSFDCUser()),
-				pass : (login == undefined ? Util.getSFDCPass() + Util.getSFDCToken()),
+				user : Util.getSFDCUser(),
+				pass : Util.getSFDCPass() + Util.getSFDCToken(),
 				maxPoll : 200,
 				pollWaitMillis : 10000
 		};
