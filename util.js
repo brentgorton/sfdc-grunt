@@ -9,28 +9,29 @@ var Util = {
 		token : ''
 	},
 	getSFDCUser : function(){
-		/*if(process.env.sfuser == null){*/
+		try{
 			Util.login = grunt.file.readJSON('.config/login.json');
-		/*}else{
-			Util.login.user = process.env.sfuser;
-		}*/
-		return Util.login.user;
+			return Util.login.user;
+		}catch(err){
+			return '';
+		}
 	},
 	getSFDCPass : function(){
 		//if(process.env.sfuser == null){
+		try{
 			Util.login = grunt.file.readJSON('.config/login.json');
-		/*}else{
-			Util.login.pw = process.env.sfpass;
-		}*/
-		return Util.login.pw;
+			return Util.login.pw;
+		}catch(err){
+			return '';
+		}
 	},
 	getSFDCToken : function(){
-		//if(process.env.sfuser == null){
+		try{
 			Util.login = grunt.file.readJSON('.config/login.json');
-		/*}else{
-			Util.login.token = process.env.sftoken;
-		}*/
-		return Util.login.token;
+			return Util.login.token;
+		}catch(err){
+			return '';
+		}
 	},
 	const : constants,
 	generatePackageXml : function(types){
