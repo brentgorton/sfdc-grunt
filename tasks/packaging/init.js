@@ -2,7 +2,7 @@ var grunt = require('grunt');
 var util = require('../../util.js');
 var metadata = require('../../metadata.js');
 module.exports = function(){
-	grunt.registerTask('sfdc-packaging-deploy', ['sfdc-packaging-cleanup', 'sfdc-packaging-write']);
+	grunt.registerTask('sfdc-packaging-deploy', [/*'sfdc-packaging-cleanup', */'sfdc-packaging-write']);
 	
 	grunt.registerTask('sfdc-packaging-cleanup', function(){
 		grunt.task.run([util.retrieveSFDC(util.const.undeploy.metadata), 'sfdc-packaging-destructive']);
