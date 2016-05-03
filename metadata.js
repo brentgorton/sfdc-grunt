@@ -146,6 +146,25 @@ var Metadata = {
 						delete customObject.actionOverrides[i].skipRecordTypeSelect;
 					}
 				}
+				if(customObject.validationRules != null){
+					if(customObject.validationRules.length != null){
+						for(var i = 0; i < customObject.validationRules.length; i++){
+							customObject.validationRules[i].errorConditionFormula.$t = 'false';
+						}
+					}else{
+						customObject.validationRules.errorConditionFormula.$t = 'false';
+					}
+				}
+				if(customObject.webLinks != null){
+					if(customObject.webLinks.length != null){
+						for(var i = 0; i < customObject.webLinks.length; i++){
+							customObject.webLinks[i].url.$t = 'http://www.google.com/';
+						}
+					}else{
+						customObject.webLinks.url.$t = 'http://www.google.com/';
+					}
+				}
+
 				result = JSON.stringify(object);
 				result = parser.toXml(result, { sanitize : false });
 				grunt.file.write(filename.replace(src, output), pd.xml('<?xml version="1.0" encoding="UTF-8"?>' + result));
