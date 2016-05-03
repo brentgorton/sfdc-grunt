@@ -155,16 +155,17 @@ var Metadata = {
 						customObject.validationRules.errorConditionFormula.$t = 'false';
 					}
 				}
-				if(customObject.webLinks != null){
-					if(customObject.webLinks.length != null){
-						for(var i = 0; i < customObject.webLinks.length; i++){
-							customObject.webLinks[i].url.$t = 'http://www.google.com/';
+				try{
+					if(customObject.webLinks != null){
+						if(customObject.webLinks.length != null){
+							for(var i = 0; i < customObject.webLinks.length; i++){
+								customObject.webLinks[i].url.$t = 'http://www.google.com/';
+							}
+						}else{
+							customObject.webLinks.url.$t = 'http://www.google.com/';
 						}
-					}else{
-						customObject.webLinks.url.$t = 'http://www.google.com/';
 					}
-				}
-
+				}catch(err){}
 				result = JSON.stringify(object);
 				result = parser.toXml(result, { sanitize : false });
 				grunt.file.write(filename.replace(src, output), pd.xml('<?xml version="1.0" encoding="UTF-8"?>' + result));
