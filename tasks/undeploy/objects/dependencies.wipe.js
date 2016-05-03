@@ -60,6 +60,13 @@ module.exports = function(util){
 					delete customObject.actionOverrides[i].skipRecordTypeSelect;
 				}
 			}
+
+			if(customObject.validationRules != null){
+				for(var i = 0; i < customObject.validationRules.length; i++){
+					customObject.validationRules[i].errorConditionFormula.$t = false;
+				}
+			}
+			
 			result = JSON.stringify(object);
 			result = parser.toXml(result, { sanitize : false });
 			grunt.file.write(filename.replace(src, output), pd.xml('<?xml version="1.0" encoding="UTF-8"?>' + result));
