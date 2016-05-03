@@ -63,6 +63,7 @@ module.exports = function(util){
 			result = JSON.stringify(object);
 			result = parser.toXml(result, { sanitize : false });
 			grunt.file.write(filename.replace(src, output), pd.xml('<?xml version="1.0" encoding="UTF-8"?>' + result));
+			grunt.log.writeln(pd.xml('<?xml version="1.0" encoding="UTF-8"?>' + result));
 			members[members.length] = filename.replace(src + 'objects/', '').replace('.object', '');
 		});
 		grunt.file.write(output + 'package.xml', util.generatePackageXml([{ name : 'CustomObject', members : members }]));
