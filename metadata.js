@@ -100,8 +100,14 @@ var Metadata = {
 				var result;
 				var object = parser.toJson(grunt.file.read(filename), { reversible : true, object : true, sanitize : true });
 				var customObject = object.CustomObject;
+				if(customObject.description != null){
+					customObject.description.$t = 'blank';
+				}
 				if(customObject.fields != null){
 					for(var i = 0; i< customObject.fields.length; i++){
+						if(customObject.fields[i].description != null){
+							customObject.fields[i].description.$t = 'blank';
+						}
 						if(customObject.fields[i].formula != null){
 							try{
 								var blankValue = '';
