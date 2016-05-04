@@ -98,7 +98,7 @@ var Metadata = {
 			var members = [];
 			grunt.file.expand(src + 'objects/*.*').forEach(function(filename){
 				var result;
-				var object = parser.toJson(grunt.file.read(filename), { reversible : true, object : true });
+				var object = parser.toJson(grunt.file.read(filename), { reversible : true, object : true, sanitize : true });
 				var customObject = object.CustomObject;
 				if(customObject.fields != null){
 					for(var i = 0; i< customObject.fields.length; i++){
@@ -167,7 +167,7 @@ var Metadata = {
 					}
 				}catch(err){}
 				result = JSON.stringify(object);
-				result = parser.toXml(result, { sanitize : true });
+				result = parser.toXml(result, { sanitize : false });
 				grunt.file.write(filename.replace(src, output), pd.xml('<?xml version="1.0" encoding="UTF-8"?>' + result));
 				members[members.length] = filename.replace(src + 'objects/', '').replace('.object', '');
 			});
