@@ -211,7 +211,7 @@ var Metadata = {
 	permissionsets : {
 		wipe : function(src, target){
 			return Metadata.generic.wipe('PermissionSet',
-				'<?xml version="1.0" encoding="UTF-8"?><PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata"></PermissionSet>',
+				'<?xml version="1.0" encoding="UTF-8"?><PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata"><label>BLANK</label></PermissionSet>',
 				src, target, 'permissionsets', 'permissionset');
 		}
 	},
