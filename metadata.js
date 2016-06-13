@@ -208,11 +208,10 @@ var Metadata = {
 			return metadata;
 		}
 	},
-	UNIQUE_COUNTER : 1,
 	permissionsets : {
-		wipe : function(src, target){
+		wipe : function(src, target, label){
 			return Metadata.generic.wipe('PermissionSet',
-				'<?xml version="1.0" encoding="UTF-8"?><PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata"><label>BLANK' + Metadata.UNIQUE_COUNTER++ + '</label></PermissionSet>',
+				'<?xml version="1.0" encoding="UTF-8"?><PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata"><label>BLANK' + (label != undefined ? label : 'LABEL ' + new Date().getTime()) + '</label></PermissionSet>',
 				src, target, 'permissionsets', 'permissionset');
 		}
 	},
