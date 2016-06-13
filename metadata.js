@@ -46,10 +46,11 @@ var Metadata = {
 			return { name : type, members : members }
 		},
 		wipe : function(type, body, src, target, dir, extension){
+			var loopCount = 1;
 			grunt.file.expand(src + dir + '/*.' + extension).forEach(function(filename){
 				var componentName = filename.replace(src + dir + '/', '').replace('.' + extension,'');
 				
-				grunt.file.write(target + dir + '/' + componentName + '.' + extension, body.replace('!NAME', componentName));
+				grunt.file.write(target + dir + '/' + componentName + '.' + extension, body.replace('!NAME', componentName).replace('!UNIQUELABEL', 'LABEL ' + loopCount++));
 				try{
 					var metadata = grunt.file.read(filename + '-meta.xml');
 					grunt.file.write(target + dir + '/' + componentName + '.' + extension + '-meta.xml', metadata);
@@ -210,8 +211,10 @@ var Metadata = {
 	},
 	permissionsets : {
 		wipe : function(src, target, label){
+			
+			
 			return Metadata.generic.wipe('PermissionSet',
-				'<?xml version="1.0" encoding="UTF-8"?><PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata"><label>BLANK' + (label != undefined ? label : 'LABEL ' + new Date().getTime()) + '</label></PermissionSet>',
+				'<?xml version="1.0" encoding="UTF-8"?><PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata"><label>!UNIQUELABEL</label></PermissionSet>',
 				src, target, 'permissionsets', 'permissionset');
 		}
 	},
