@@ -31,6 +31,14 @@ module.exports = function(){
 		grunt.task.run(util.deploySFDC('src/', true));
 	});
 
+	grunt.registerTask('sfdc-install-package', function(namespace, version, envname, runTests){
+		grunt.task.run(util.installPackage(namespace, version, process.env[envname + 'user'],process.env[envname + 'pass'] + process.env[envname + 'token'], runTests));
+	})
+
+	grunt.registerTask('sfdc-install-package-with-login', function(namespace, version, user, pass, runTests){
+		grunt.task.run(util.installPackage(namespace, version, user, pass, runTests));
+	})
+
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-wget');
 	grunt.loadNpmTasks('grunt-exec');

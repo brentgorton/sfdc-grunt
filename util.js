@@ -111,6 +111,41 @@ var Util = {
 		}
 		grunt.config.set('antdeploy', config);
 		return 'antdeploy:' + deployName;
+	},
+	installPackage : function(namespace, version, user, pass, runTests){
+		version = version.replace('v', '');
+		var config = grunt.config.get('antdeploy') || {};
+		config.options = {
+				serverurl : 'https://login.salesforce.com',
+				user : Util.getSFDCUser(),
+				pass : Util.getSFDCPass() + Util.getSFDCToken(),
+				maxPoll : 200,
+				pollWaitMillis : 10000
+		};
+		var deployName = 'deploy_0';
+		for(var i = 0; i < 1000; i++){
+			if(!config.hasOwnProperty('deploy_' + i)){
+				deployName = 'deploy_' + i;
+				break;
+			}
+		}
+		var path = Util.const.install.root + namespace + '/' + version + '/';
+		grunt.file.write(path + 'package.xml','<?xml version="1.0" encoding="UTF-8"?><Package xmlns="http://soap.sforce.com/2006/04/metadata"><types><members>*</members><name>InstalledPackage</name></types><version>32.0</version></Package>');
+		grunt.file.write(path + 'installedPackages/' + namespace + '.installedPackage', '<?xml version="1.0" encoding="UTF-8"?><InstalledPackage xmlns="http://soap.sforce.com/2006/04/metadata"><versionNumber>' + version + '</versionNumber></InstalledPackage>');
+		config[deployName] = {
+			options : {
+				root : path,
+				existingPackage : true,
+				runAllTests : ((runTests == 'true' || runTests == true) ? true : false),
+				serverurl : 'https://login.salesforce.com',
+				user : user,
+				pass : pass,
+				maxPoll : 400,
+				pollWaitMillis : 10000
+			}
+		}
+		grunt.config.set('antdeploy', config);
+		return 'antdeploy:' + deployName;
 	}
 }
 
