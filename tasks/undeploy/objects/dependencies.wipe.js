@@ -32,7 +32,8 @@ module.exports = function(util){
 										break;
 							}
 							customObject.fields[i].formula.$t = blankValue;
-							customObject.fields[i].formulaTreatBlanksAs.$t = 'BlankAsBlank';
+							//customObject.fields[i].formulaTreatBlanksAs.$t = 'BlankAsBlank';
+							try{ delete customObject.fields[i].formulaTreatBlanksAs }catch(err){}
 							grunt.log.writeln('Wiped '['green'] + customObject.fullName.$t + '.' + customObject.fields[i].fullName.$t)
 						}catch(err){}
 					}
