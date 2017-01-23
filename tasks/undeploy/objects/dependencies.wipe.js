@@ -22,17 +22,17 @@ module.exports = function(util){
 							switch(customObject.fields[i].type.$t){
 								case 'Date' : blankValue = 'DATE(1990,1,1)';
 										break;
+								case 'Currency' :
+								case 'Percent' :
 								case 'Number' : blankValue = 0;
 										break;
 								case 'Text' : blankValue = '\'blank\'';
-										break;
-								case 'Percent' : blankValue = 0;
 										break;
 								case 'Checkbox' : blankValue = 'true';
 										break;
 							}
 							customObject.fields[i].formula.$t = blankValue;
-							customObject.fields[i].formulaTreatBlanksAs.$t = 'BlankAsBlank';
+							//customObject.fields[i].formulaTreatBlanksAs.$t = 'BlankAsBlank';
 							grunt.log.writeln('Wiped '['green'] + customObject.fullName.$t + '.' + customObject.fields[i].fullName.$t)
 						}catch(err){}
 					}
