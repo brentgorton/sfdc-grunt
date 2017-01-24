@@ -25,7 +25,7 @@ module.exports = function(util){
 								case 'Currency' :
 								case 'Percent' :
 								case 'Number' : 
-										'DAY(TODAY())'
+										blankValue = 'DAY(TODAY())'
 										break;
 								case 'Text' : blankValue = '\'blank\'';
 										break;
