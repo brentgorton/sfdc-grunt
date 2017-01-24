@@ -15,6 +15,9 @@ module.exports = function(util){
 			var object = parser.toJson(grunt.file.read(filename), { reversible : true, object : true });
 			var customObject = object.CustomObject;
 			if(customObject.fields != null){
+				
+				grunt.log(writeln(filename));
+				grunt.log.writeln(customObject.toJSON());
 				for(var i = 0; i< customObject.fields.length; i++){
 					if(customObject.fields[i].formula != null){
 						try{
