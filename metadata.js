@@ -115,6 +115,8 @@ var Metadata = {
 								switch(customObject.fields[i].type.$t){
 									case 'Date' : blankValue = 'DATE(1990,1,1)';
 											break;
+									case 'Currency' :
+									case 'Percent' :
 									case 'Number' : blankValue = 0;
 											break;
 									case 'Text' : blankValue = '\'blank\'';
