@@ -109,6 +109,7 @@ var Util = {
 				pollWaitMillis : 10000
 			}
 		}
+		grunt.log.writeln(JSON.stringifyPretty(config));
 		grunt.config.set('antdeploy', config);
 		return 'antdeploy:' + deployName;
 	},
