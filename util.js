@@ -114,7 +114,7 @@ var Util = {
 			options : {
 				root : path,
 				existingPackage : (existingPackage == undefined || existingPackage),
-				runAllTests : false	/*(runTests == undefined ? false : runTests)*/,
+				runAllTests : (runTests == undefined ? false : runTests),
 				serverurl : 'https://login.salesforce.com',
 				user : Util.getSFDCUser(),
 				pass : Util.getSFDCPass() + Util.getSFDCToken(),
