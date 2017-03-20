@@ -119,7 +119,7 @@ var Util = {
 			options : {
 				root : path,
 				existingPackage : (existingPackage == undefined || existingPackage),
-				runAllTests : (runTests == undefined ? false : runTests),
+				runAllTests : false/*(runTests == undefined ? false : runTests)*/,
 				serverurl : 'https://login.salesforce.com',
 				user : Util.getSFDCUser(),
 				pass : Util.getSFDCPass() + Util.getSFDCToken(),
@@ -128,6 +128,7 @@ var Util = {
 				tests : testsToRun
 			}
 		}
+		grunt.log.writeln(JSON.stringify(config[deployName]));
 		grunt.config.set('antdeploy', config);
 		return 'antdeploy:' + deployName;
 	},
