@@ -119,8 +119,8 @@ var Util = {
 				user : Util.getSFDCUser(),
 				pass : Util.getSFDCPass() + Util.getSFDCToken(),
 				maxPoll : 200,
-				pollWaitMillis : 10000,
-				tests : testsToRun
+				pollWaitMillis : 10000/*,
+				tests : testsToRun*/
 			}
 		}
 		grunt.config.set('antdeploy', config);
