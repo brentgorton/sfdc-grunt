@@ -99,27 +99,22 @@ var Util = {
 		}
 
 		var testsToRun = null;
-		grunt.log.writeln('DEBUGGING TEST MANAGEMENT');
 		if(runTests){
 			testsToRun = [];
 			var searchString = /@isTest|testMethod/g
 			grunt.file.expand(path + 'classes/*.cls').forEach(function(filename){
-				grunt.log.writeln(filename);
 				var data = grunt.file.read(filename);
-				grunt.log.writeln(data.match(searchString));
 				if(data.match(searchString) != null){
 					testsToRun[testsToRun.length] = filename.replace(path + 'classes/','').replace('.cls','');
 				}
 			});
 		}
-		grunt.log.writeln(JSON.stringify(runTests));
-		grunt.log.writeln(JSON.stringify(testsToRun));
 
 		config[deployName] = {
 			options : {
 				root : path,
 				existingPackage : (existingPackage == undefined || existingPackage),
-				runAllTests : false/*(runTests == undefined ? false : runTests)*/,
+				runAllTests : false	/*(runTests == undefined ? false : runTests)*/,
 				serverurl : 'https://login.salesforce.com',
 				user : Util.getSFDCUser(),
 				pass : Util.getSFDCPass() + Util.getSFDCToken(),
@@ -128,7 +123,6 @@ var Util = {
 				tests : testsToRun
 			}
 		}
-		grunt.log.writeln(JSON.stringify(config[deployName]));
 		grunt.config.set('antdeploy', config);
 		return 'antdeploy:' + deployName;
 	},
