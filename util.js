@@ -101,26 +101,13 @@ var Util = {
 		var testsToRun = null;
 		if(runTests){
 			testsToRun = [];
-			var testSearchConfig = grunt.config.get('search') || {};
-			testSearchConfig.tests = {
-			    files: {
-					src: [path + "classes/*.cls"]
-			    },
-			    options: {
-					searchString: /@isTest|testMethod/g,
-					logFile: "tmp/testresults.json"
-			    }
-			}
-			grunt.config.set('search', testSearchConfig);
-			grunt.task.run('search:tests');
-			
-			var testClasses = grunt.file.readJSON('tmp/testresults.json');
-			for(var key in testClasses.results){
-				if(testClasses.results.hasOwnProperty(key)){
-					testsToRun[testsToRun.length] = key.replace('.cls','').replace(path + 'classes/','');
-					grunt.log.writeln(key.replace('.cls','').replace(path + 'classes/',''));
+			var searchString = /@isTest|testMethod/g
+			grunt.file.expand(path + 'classes/*.cls').forEach(function(filename){
+				var data = grunt.file.read(filename);
+				if(data.match(searchString) != null){
+					testsToRun[testsToRun.length] = filename.replace(path + 'classes/','').replace('.cls','');
 				}
-			}
+			});
 		}
 
 		config[deployName] = {
