@@ -97,6 +97,32 @@ var Util = {
 				break;
 			}
 		}
+
+		var testsToRun = null;
+		if(runTests){
+			testsToRun = [];
+			var testSearchConfig = grunt.config.get('search') || {};
+			testSearchConfig.tests = {
+			    files: {
+					src: [path + "classes/*.cls"]
+			    },
+			    options: {
+					searchString: /@isTest|testMethod/g,
+					logFile: "tmp/testresults.json"
+			    }
+			}
+			grunt.config.set('search', testSearchConfig);
+			grunt.task.run('search:tests');
+			
+			var testClasses = grunt.file.readJSON('tmp/testresults.json');
+			for(var key in testClasses.results){
+				if(testClasses.results.hasOwnProperty(key)){
+					testsToRun[testsToRun.length] = key.replace('.cls','').replace(path + 'classes/','');
+					grunt.log.writeln(key.replace('.cls','').replace(path + 'classes/',''));
+				}
+			}
+		}
+
 		config[deployName] = {
 			options : {
 				root : path,
@@ -106,7 +132,8 @@ var Util = {
 				user : Util.getSFDCUser(),
 				pass : Util.getSFDCPass() + Util.getSFDCToken(),
 				maxPoll : 200,
-				pollWaitMillis : 10000
+				pollWaitMillis : 10000,
+				tests : testsToRun
 			}
 		}
 		grunt.config.set('antdeploy', config);
