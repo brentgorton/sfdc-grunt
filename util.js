@@ -99,16 +99,21 @@ var Util = {
 		}
 
 		var testsToRun = null;
+		grunt.log.writeln('DEBUGGING TEST MANAGEMENT');
 		if(runTests){
 			testsToRun = [];
 			var searchString = /@isTest|testMethod/g
 			grunt.file.expand(path + 'classes/*.cls').forEach(function(filename){
+				grunt.log.writeln(filename);
 				var data = grunt.file.read(filename);
+				grunt.log.writeln(data.match(searchString));
 				if(data.match(searchString) != null){
 					testsToRun[testsToRun.length] = filename.replace(path + 'classes/','').replace('.cls','');
 				}
 			});
 		}
+		grunt.log.writeln(JSON.stringify(runTests));
+		grunt.log.writeln(JSON.stringify(testsToRun));
 
 		config[deployName] = {
 			options : {
