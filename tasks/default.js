@@ -43,4 +43,5 @@ module.exports = function(){
 	grunt.loadNpmTasks('grunt-wget');
 	grunt.loadNpmTasks('grunt-exec');
 	grunt.loadNpmTasks('grunt-anon-tasks');
+	grunt.loadNpmTasks('grunt-search');
 }
