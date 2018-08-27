@@ -19,6 +19,10 @@ module.exports = function(util){
 				grunt.log(writeln(filename));
 				grunt.log.writeln(customObject.toJSON());
 				for(var i = 0; i< customObject.fields.length; i++){
+					if(customObject.fields[i].description != null || customObject.fields[i].inlineHelpText){
+						customObject.fields[i].description = '';
+						customObject.fields[i].inlineHelpText = '';
+					}
 					if(customObject.fields[i].formula != null){
 						try{
 							var blankValue = '';
