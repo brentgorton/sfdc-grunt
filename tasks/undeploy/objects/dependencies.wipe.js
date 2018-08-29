@@ -12,7 +12,7 @@ module.exports = function(util){
 		var members = [];
 		grunt.file.expand(src + 'objects/*.*').forEach(function(filename){
 			var result;
-			var object = parser.toJson(grunt.file.read(filename), { reversible : true, object : true, sanitize : true });
+			var object = parser.toJson(grunt.file.read(filename), { reversible : true, object : true });
 			var customObject = object.CustomObject;
 			if(customObject.fields != null){
 				
